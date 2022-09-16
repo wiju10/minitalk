@@ -1,31 +1,31 @@
-NAME	=	libftprintf.a
+NAME = libftprintf.a
 
-SOURCES	=	ft_printf.c	ft_putchar.c	ft_putstr.c \
-			ft_putint.c ft_putptr.c	ft_putusint.c \
-			ft_puthex.c \
+SRC = $(shell find . -name ft_printf\*.c)
 
-OBJECTS	= $(SOURCES:.c=.o)
-CC		=	gcc
-CFLAGS	=	-Wall -Werror -Wextra
-RM		=	rm -rf
+CC = gcc
+CFLAGS = -Wextra -Wall -Werror
 
+all: $(NAME)
 
+$(NAME):$(SRC:.c=.o)
+	ar rcs $@ $^
 
-all		:	$(NAME)
+bonus : $(BONUS:.c=.o)
+	ar rcs $(NAME) $^
 
-$(NAME)	:	$(OBJECTS)
-			# make -C libft
-			ar rcs $@ $^ $(LIBFT_OBJECTS)
+so:
+	$(CC) -fPIC $(CFLAGS) $(SRC)
+	gcc -shared -o ft_printf.so $(OBJ)
 
-$.o : %.c
-			$(CC) $(CFLAGS) -c $< -o $@
+%.o : %.c ft_printf.h
+	$(CC) $(CFLAGS) $< -c
 
-clean	:
-			$(RM) $(OBJECTS)
+clean :
+	rm -f *.o
 
-fclean	:	clean
-			$(RM) $(NAME)
+fclean :
+	rm -f $(NAME) *.o
 
-re		:	fclean all
+re : fclean all
 
-.phony	:	all clean fclean re libft
+.PHONY : all clean fclean re
