@@ -7,10 +7,10 @@ CFLAGS = -Wall -Wextra -Werror
 all: server client
 
 server: server.o ft_printf
-		$(CC) -o $@ $< ft_printf/libftprintf.a
+		$(CC) -o $@ $< ft_printf/ft_printf.a
 		
 client: client.o ft_printf libft
-		$(CC) -o $@ $< ft_printf/libftprintf.a
+		$(CC) -o $@ $< ft_printf/ft_printf.a
 		$(CC) -o $@ $< libft/libft.a
 
 %o: %.c
@@ -18,8 +18,11 @@ client: client.o ft_printf libft
 		
 libft:
 		make -C libft
+
+
 ft_printf:
 		make -C ft_printf
+
 
 clean:
 		rm -f $(OBJ)
@@ -27,7 +30,7 @@ clean:
 		make -C libft clean
 
 fclean:
-		rm -f server client ft_printf/ft_printf.a libminitalk.a 
+		rm -f server client libft/libft.a ft_printf/ft_printf.a
 		
 re: clean all
 
