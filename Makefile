@@ -10,7 +10,8 @@ server: server.o ft_printf
 		$(CC) -o $@ $< ft_printf/libftprintf.a
 		
 client: client.o ft_printf
-		$(CC) -o $@ $< ft_printf/libftprintf.a libft/libft.a
+		$(CC) -o $@ $< ft_printf/libftprintf.a
+		$(CC) -o $@ $< libft/libft.a
 
 %o: %.c
 		$(CC) -c $(CFLAGS) $?
@@ -24,7 +25,7 @@ clean:
 		make -C libft clean
 
 fclean:
-		rm -f server client libft/libft.a ft_printf/libftft_printf.a libminitalk.a 
+		rm -f server client ft_printf/ft_printf.a libminitalk.a 
 		
 re: clean all
 
