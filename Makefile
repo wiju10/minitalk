@@ -6,12 +6,12 @@ CFLAGS = -Wall -Wextra -Werror
 
 all: server client
 
-server: server.o ft_printf
-		$(CC) -o $@ $< ft_printf/ft_printf.a
-		
+server: server.o ft_printf libft
+		$(CC) -o $@ $< ft_printf/libftprintf.a
+
 client: client.o ft_printf libft
-		$(CC) -o $@ $< ft_printf/ft_printf.a
 		$(CC) -o $@ $< libft/libft.a
+
 
 %o: %.c
 		$(CC) -c $(CFLAGS) $?
