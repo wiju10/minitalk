@@ -9,13 +9,15 @@ all: server client
 server: server.o ft_printf
 		$(CC) -o $@ $< ft_printf/libftprintf.a
 		
-client: client.o ft_printf
+client: client.o ft_printf libft
 		$(CC) -o $@ $< ft_printf/libftprintf.a
 		$(CC) -o $@ $< libft/libft.a
 
 %o: %.c
 		$(CC) -c $(CFLAGS) $?
 		
+libft:
+		make -C libft
 ft_printf:
 		make -C ft_printf
 
